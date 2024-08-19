@@ -1,0 +1,14 @@
+# Configurar el comportamiento predeterminado para todos los archivos de texto
+* text=auto
+
+# Declarar archivos específicos que siempre deben tener finales de línea CRLF
+*.json text eol=crlf
+*.gitignore text eol=crlf
+
+# Declarar archivos específicos que siempre deben tener finales de línea LF
+*.sh text eol=lf
+*.md text eol=lf
+
+# Denotar todos los archivos binarios que no deben ser modificados
+*.png binary
+*.jpg binary

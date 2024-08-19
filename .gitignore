@@ -1,6 +1,13 @@
 # Archivos de PlatformIO
 /.pio
 /.vscode
+# Parte de la carpeta Pruebas:
+/Pruebas/.vscode/
+/Pruebas/build/
+# Parte del proyecto BlinkingLed:
+/Pruebas/BlinkingLed/.pio/
+/Pruebas/BlinkingLed/.vscode/
+
 
 # Archivos de compilación
 /build

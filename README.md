@@ -1,9 +1,8 @@
 
 # MiprimerRobot
 
-    En este repositorio añadiremos todo lo necesario para poder desarrollar mi primer robot con 
-
-    La placa que que usaremos será NodeMCU-32S.
+    En este repositorio añadiremos todo lo necesario para poder desarrollar mi primer robot con la placa ESP32 nosotros usaremos
+    la NodeMCU-32S.
 
 
 ## Demo
