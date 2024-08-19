@@ -1,0 +1,28 @@
+# Archivos de PlatformIO
+/.pio
+/.vscode
+
+# Archivos de compilación
+/build
+/.build
+
+# Archivos de configuración específicos del entorno
+*.env
+
+# Archivos de bibliotecas
+lib/
+
+# Archivos de dependencias
+#/.clangd
+#/.clang-format
+#/.clang-tidy
+#/.ccls-cache
+#/.cquery_cached_index
+
+# Archivos de sistema
+#.DS_Store
+#Thumbs.db
+
+# Archivos de logs
+*.log
+
