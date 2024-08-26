@@ -1,0 +1,101 @@
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+#include <driver/gpio.h>
+#include <freertos/queue.h>
+
+
+// PWM En este caso para LED CONTROL:
+#include <driver/ledc.h>
+
+
+constexpr gpio_num_t LED_PIN = GPIO_NUM_2;
+constexpr gpio_num_t INPUT_PIN = GPIO_NUM_32; // push button
+
+// Añadamimos el mangling 
+extern "C" void app_main();
+
+
+void app_main() 
+{
+    // Setup Aquí configuraremos los puertos:
+
+    // Primero configuramos el timer, con la estructura:
+    ledc_timer_config_t ledcTimer;
+    ledcTimer.speed_mode = LEDC_LOW_SPEED_MODE;
+    ledcTimer.freq_hz = 500;        // En Hz
+    ledcTimer.duty_resolution = LEDC_TIMER_13_BIT; //4096 resolucion 
+    ledcTimer.clk_cfg = LEDC_AUTO_CLK;
+    ledcTimer.timer_num = LEDC_TIMER_0;
+
+    // Le pasamos la configuracion del LED_CONTROL
+    ledc_timer_config(&ledcTimer);
+
+
+    // Ahora debemos de configurar el CANAL:
+    ledc_channel_config_t ledcChannel;
+    ledcChannel.channel = LEDC_CHANNEL_0;   // Por hacerlo todo que sea más sencillo, hay 7 para elegir.
+    ledcChannel.gpio_num = GPIO_NUM_22;
+    ledcChannel.duty = 4096; /*!< LEDC channel duty, the range of duty setting is [0, (2**duty_resolution)] */
+    //2* LEDC_TIMER_13_BIT(2^13 - 1 = 8192) -> En nuestro caso vamos usar la mitad 4096 duty cycle al 50%
+    ledcChannel.timer_sel = LEDC_TIMER_0;
+    ledcChannel.intr_type =  LEDC_INTR_DISABLE; // Por ahora no queremos interrupciones.
+    ledcChannel.speed_mode = LEDC_LOW_SPEED_MODE;   // Lo configuramos como el TIMER
+    ledcChannel.flags.output_invert = 0;    // No invertimos los valores
+
+    //Le pasamos la configuración del canal:
+    ledc_channel_config(&ledcChannel);
+
+
+    // Configuramos el PULSADOR
+    gpio_config_t config_input;
+    config_input.mode = GPIO_MODE_INPUT;
+    config_input.pin_bit_mask = (1ULL << INPUT_PIN);
+    config_input.intr_type = GPIO_INTR_DISABLE;
+    config_input.pull_down_en = GPIO_PULLDOWN_ENABLE;
+    config_input.pull_up_en = GPIO_PULLUP_DISABLE;
+    gpio_config(&config_input);
+
+
+    
+    uint32_t cnt = 0;
+
+
+    // Bucle infinito donde estará todo la parte logica:
+    while (1)
+    {
+        
+        /* code */
+        vTaskDelay(pdMS_TO_TICKS(100));
+        
+        /*
+            Parameters:
+                speed_mode – Select the LEDC channel group with specified speed mode. Note that not all targets support high speed mode.
+                channel – LEDC channel (0 - LEDC_CHANNEL_MAX-1), select from ledc_channel_t
+                duty – Set the LEDC duty, the range of duty setting is [0, (2**duty_resolution) - 1]
+            Returns:
+                ESP_OK Success - ESP_ERR_INVALID_ARG Parameter error
+            ---------------------------
+            nosotros vamos a aumentar el duty con un contardor: CNT 
+        */
+        ledc_set_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0, cnt);
+
+        // Despues de cambiar el duty cycle hay que actualizar el valor:
+        /*
+            Parameters:
+            speed_mode – Select the LEDC channel group with specified speed mode. Note that not all targets support high speed mode.
+            channel – LEDC channel (0 - LEDC_CHANNEL_MAX-1), select from ledc_channel_t
+
+            Returns:
+
+            ESP_OK Success - ESP_ERR_INVALID_ARG Parameter error
+        */
+        ledc_update_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0);
+        cnt +=100;
+        if (cnt > 8192)     // 8192 -> 1<<13 tambien se puede poner así
+        {
+            cnt = 0;
+        }
+
+    }
+    
+}

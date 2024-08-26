@@ -4,9 +4,14 @@
 # Parte de la carpeta Pruebas:
 /Pruebas/.vscode/
 /Pruebas/build/
+
 # Parte del proyecto BlinkingLed:
 /Pruebas/BlinkingLed/.pio/
 /Pruebas/BlinkingLed/.vscode/
+
+# Parte del proyecto LED_CONTROL_LEDC:
+/Pruebas/LED_CONTROL_LEDC/.pio/
+/Pruebas/LED_CONTROL_LEDC/.vscode/
 
 
 # Archivos de compilación
