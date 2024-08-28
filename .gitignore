@@ -17,6 +17,9 @@
 /Pruebas/MOTOR_CONTROL/.pio/
 /Pruebas/MOTOR_CONTROL/.vscode/
 
+# Parte del proyecto ADC_SensorLine:
+/Pruebas/ADC_SensorLine/.pio/
+/Pruebas/ADC_SensorLine/.vscode/
 
 # Archivos de compilación
 /build
