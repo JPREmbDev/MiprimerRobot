@@ -13,6 +13,10 @@
 /Pruebas/LED_CONTROL_LEDC/.pio/
 /Pruebas/LED_CONTROL_LEDC/.vscode/
 
+# Parte del proyecto MOTOR_CONTROL:
+/Pruebas/MOTOR_CONTROL/.pio/
+/Pruebas/MOTOR_CONTROL/.vscode/
+
 
 # Archivos de compilación
 /build
