@@ -7,8 +7,6 @@
 // Include del driver del ADC:
 #include "driver/adc.h"
 
-constexpr gpio_num_t Sensor1    = GPIO_NUM_36;
-
 extern "C" void app_main();
 
 void app_main() 
