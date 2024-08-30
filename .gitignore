@@ -21,6 +21,10 @@
 /Pruebas/ADC_SensorLine/.pio/
 /Pruebas/ADC_SensorLine/.vscode/
 
+# Parte del proyecto MUX_Multiplexor_16Canales:
+/Pruebas/MUX_Multiplexor_16Canales/.pio/
+/Pruebas/MUX_Multiplexor_16Canales/.vscode/
+
 # Archivos de compilación
 /build
 /.build
