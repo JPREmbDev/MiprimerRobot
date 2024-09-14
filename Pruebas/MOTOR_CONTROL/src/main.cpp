@@ -1,3 +1,45 @@
+/*
+
+DRIVER MOTORES -----> TB6612FNG
+
+            PINOUT      
+GND     ---------->     CABLE A GND
+VCC     ---------->     3V3 DEL ESP32
+VM      ---------->     2,5 V y 13,5 V
+
+Pines salida a motores:
+AO_1    ---------->     PIN DE SALIDO A MOTOR A
+AO_2    ---------->     PIN DE SALIDO A MOTOR A
+BO_1    ---------->     PIN DE SALIDO A MOTOR B
+BO_2    ---------->     PIN DE SALIDO A MOTOR B
+
+Pines para el sentido de los motores (ENTRADA)
+AIN_1    ---------->     PIN SENTIDO DEL MOTOR A
+AIN_2    ---------->     PIN SENTIDO DEL MOTOR A
+BIN_1    ---------->     PIN SENTIDO DEL MOTOR B
+BIN_2    ---------->     PIN SENTIDO DEL MOTOR B
+
+PWM MOTORES:
+PWM_A   ----------->    PWM DEL MOTOR A
+PWM_B   ----------->    PWM DEL MOTOR B
+
+
+STBY    ----------->    (VCC)PIN DE STAND BY CONTROLADOR DE USO DEL DRIVER
+
+            INPUT                               OUTPUT
+    IN1     IN2     PWM     STBY            OUT1        OUT2        MODE
+-------------------------------------------------------------
+     L       H       H       H               L           H          CCW COUNTERCLOCKWISE (EN CONTRA AGUJAS RELOJ)
+     L       H       L       H               L           L          SHORT BRAKE (FRENADO CORTO)
+     H       L       H       H               H           L          CW CLOCKWISE (EN SENTIDO AGUJAS RELOJ)
+     H       L       L       H               L           L          SHORT BRAKE (FRENADO CORTO)
+
+El funcionamiento es que el STBY debemos tenerlo siempre en HIGH
+
+*/
+
+
+
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <driver/gpio.h>
