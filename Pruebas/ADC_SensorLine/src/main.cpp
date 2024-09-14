@@ -1,3 +1,10 @@
+/*
+    Utilizaremos para probar el ADC un sensor "SENSOR LINES FOLLOW 8 CHANNELS"
+        PIN IR  -----> Si está a 3V3 quiere decir que todos los sensores pueden leer
+                -----> Si está a 0 (GND) quiere decir que todos los sensores están apagados.
+*/
+
+
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <driver/gpio.h>
